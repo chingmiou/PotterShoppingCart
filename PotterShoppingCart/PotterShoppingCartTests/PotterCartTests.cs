@@ -82,5 +82,24 @@ namespace PotterShoppingCartTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Test_Buy_One_Episode1_And_One_Episode2_And_One_Episode3_And_One_Episode4_And_One_Episode5_CheckoutPrice_Should_Be_375()
+        {
+            var target = new PotterCart();
+            var cartList = new List<PotterSeries>
+            {
+                new PotterSeries { Episode = 1, Quantity = 1, Price = 100 },
+                new PotterSeries { Episode = 2, Quantity = 1, Price = 100 },
+                new PotterSeries { Episode = 3, Quantity = 1, Price = 100 },
+                new PotterSeries { Episode = 4, Quantity = 1, Price = 100 },
+                new PotterSeries { Episode = 5, Quantity = 1, Price = 100 }
+            };
+            var expected = 375;
+
+            var actual = target.GetCheckoutPrice(cartList);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
