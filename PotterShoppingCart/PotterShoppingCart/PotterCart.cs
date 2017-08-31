@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterShoppingCart
@@ -10,8 +9,12 @@ namespace PotterShoppingCart
         {
         }
 
-        public int GetCheckoutPrice(List<PotterSeries> potterList)
+        public decimal GetCheckoutPrice(List<PotterSeries> potterList)
         {
+            if (potterList.Sum(x => x.Quantity) == 2)
+            {
+                return potterList.Sum(x => x.Price * x.Quantity) * 0.95M;
+            }
             return potterList.Sum(x => x.Price * x.Quantity);
         }
     }
