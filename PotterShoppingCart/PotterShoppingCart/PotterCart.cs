@@ -11,17 +11,24 @@ namespace PotterShoppingCart
 
         public decimal GetCheckoutPrice(List<PotterSeries> potterList)
         {
-            if (potterList.Sum(x => x.Quantity) == 3)
+            decimal discountRate = 1.0M;
+
+            switch (potterList.Sum(x => x.Quantity))
             {
-                return potterList.Sum(x => x.Price * x.Quantity) * 0.9M;
+                case 1:
+                    discountRate = 1.0M;
+                    break;
+
+                case 2:
+                    discountRate = 0.95M;
+                    break;
+
+                case 3:
+                    discountRate = 0.9M;
+                    break;
             }
 
-            if (potterList.Sum(x => x.Quantity) == 2)
-            {
-                return potterList.Sum(x => x.Price * x.Quantity) * 0.95M;
-            }
-
-            return potterList.Sum(x => x.Price * x.Quantity);
+            return potterList.Sum(x => x.Price * x.Quantity) * discountRate;
         }
     }
 }
