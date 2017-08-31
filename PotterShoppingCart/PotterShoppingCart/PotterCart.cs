@@ -20,7 +20,19 @@ namespace PotterShoppingCart
 
         public decimal GetCheckoutPrice(List<PotterSeries> potterList)
         {
-            return potterList.Sum(x => x.Price * x.Quantity) * _discountRates[potterList.Sum(x => x.Quantity)];
+            decimal totalPrice = 0;
+
+            List<PotterSeries> packageOne = potterList.FindAll(x => x.Quantity >= 1);
+            totalPrice += packageOne.Sum(x => x.Price) * _discountRates[packageOne.Count];
+
+            List<PotterSeries> packageTwo = potterList.FindAll(x => x.Quantity >= 2);
+            if (packageTwo.Count == 0)
+            {
+                return totalPrice;
+            }
+
+            totalPrice += packageTwo.Sum(x => x.Price) * _discountRates[packageTwo.Count];
+            return totalPrice;
         }
     }
 }
