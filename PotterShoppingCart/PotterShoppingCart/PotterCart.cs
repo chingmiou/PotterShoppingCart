@@ -26,6 +26,10 @@ namespace PotterShoppingCart
                 case 3:
                     discountRate = 0.9M;
                     break;
+
+                case 4:
+                    discountRate = 0.8M;
+                    break;
             }
 
             return potterList.Sum(x => x.Price * x.Quantity) * discountRate;
