@@ -28,18 +28,19 @@ namespace PotterShoppingCart
                 return potterList.Sum(x => x.Price * x.Quantity) * _discountRates[countBuyTwo + 1];
             }
 
+            return CalculateCheckoutPrice(potterList);
+        }
+
+        private decimal CalculateCheckoutPrice(List<PotterSeries> potterList)
+        {
             decimal totalPrice = 0;
 
-            List<PotterSeries> packageOne = potterList.FindAll(x => x.Quantity >= 1);
-            totalPrice += packageOne.Sum(x => x.Price) * _discountRates[packageOne.Count];
-
-            List<PotterSeries> packageTwo = potterList.FindAll(x => x.Quantity >= 2);
-            if (packageTwo.Count == 0)
+            foreach (var discountQuantity in _discountRates.Keys)
             {
-                return totalPrice;
+                List<PotterSeries> seriesList = potterList.FindAll(x => x.Quantity >= discountQuantity);
+                totalPrice += seriesList.Count == 0 ? 0 : seriesList.Sum(x => x.Price) * _discountRates[seriesList.Count];
             }
 
-            totalPrice += packageTwo.Sum(x => x.Price) * _discountRates[packageTwo.Count];
             return totalPrice;
         }
     }
