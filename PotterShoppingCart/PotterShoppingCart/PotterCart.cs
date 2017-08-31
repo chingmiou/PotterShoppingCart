@@ -20,6 +20,14 @@ namespace PotterShoppingCart
 
         public decimal GetCheckoutPrice(List<PotterSeries> potterList)
         {
+            int countBuyOne = potterList.Count(x => x.Quantity == 1);
+            int countBuyTwo = potterList.Count(x => x.Quantity == 2);
+
+            if (countBuyOne > 0 && countBuyTwo > 1 && countBuyOne % 2 == 0)
+            {
+                return potterList.Sum(x => x.Price * x.Quantity) * _discountRates[countBuyTwo + 1];
+            }
+
             decimal totalPrice = 0;
 
             List<PotterSeries> packageOne = potterList.FindAll(x => x.Quantity >= 1);
