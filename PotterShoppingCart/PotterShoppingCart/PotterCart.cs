@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterShoppingCart
 {
@@ -11,7 +12,7 @@ namespace PotterShoppingCart
 
         public int GetCheckoutPrice(List<PotterSeries> potterList)
         {
-            throw new NotImplementedException();
+            return potterList.Sum(x => x.Price * x.Quantity);
         }
     }
 }
