@@ -10,7 +10,8 @@ namespace PotterShoppingCart
             { 1, 1.00M },
             { 2, 0.95M },
             { 3, 0.90M },
-            { 4, 0.80M }
+            { 4, 0.80M },
+            { 5, 0.75M }
         };
 
         public PotterCart()
